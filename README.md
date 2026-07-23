@@ -1,36 +1,128 @@
-# Splitr
+# 💸 Splitr
 
-Splitr is a modern, full-stack web application designed to make expense sharing and bill splitting among friends, family, or colleagues as effortless as possible. Think of it as a clone of Splitwise, but with a more modern tech stack and AI-powered features.
+Splitr is an AI-powered expense sharing application inspired by Splitwise. It enables users to split bills, track balances, settle debts, and manage shared expenses in real time. The application also leverages AI to scan receipts and automatically extract expense details, reducing manual data entry.
 
-## 🚀 What Problem It Solves
+---
 
-Managing shared expenses manually can be a nightmare. Who paid for dinner? How much does Alice owe Bob for the trip? Did Charlie pay his share of the rent? Splitr solves these common problems by providing a centralized platform to:
+## ✨ Features
 
-- **Track Shared Expenses:** Easily add bills and specify who participated.
-- **Calculate Balances:** Automatically compute complex debt networks to minimize the number of transactions needed to settle up.
-- **Settle Debts:** Keep a clear, historical record of who has paid what, so there is never any ambiguity.
-- **Automate Reminders:** Send notifications and reminders for unsettled balances.
+* 👥 Create and manage expense groups
+* 💰 Add and split expenses among group members
+* ⚖️ Automatic balance calculation
+* 🔄 Debt simplification to minimize settlements
+* 📸 AI-powered receipt scanning using Gemini
+* 📊 Expense analytics and financial insights
+* 📧 Automated payment reminder emails
+* ⚡ Real-time synchronization across all connected users
+* 🔒 Secure authentication with Clerk
 
-## 💻 Tech Stack
+---
 
-This project is built using a bleeding-edge modern web development stack:
+## 🛠 Tech Stack
 
-- **Frontend Framework:** [Next.js 15](https://nextjs.org/) (App Router, React 19)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with Radix UI components for a beautiful, accessible UI
-- **Authentication:** [Clerk](https://clerk.com/) for secure and seamless user login/registration
-- **Backend & Database:** [Convex](https://www.convex.dev/) for real-time data syncing and serverless backend functions
-- **AI Integration:** [Google Generative AI (Gemini)](https://ai.google.dev/) for intelligent features like receipt scanning and parsing
-- **Background Jobs:** [Inngest](https://www.inngest.com/) for reliable background tasks and event-driven workflows
-- **Email Notifications:** [Resend](https://resend.com/) for transactional emails
-- **Data Visualization:** [Recharts](https://recharts.org/) for beautiful financial charts
-- **Form Handling:** React Hook Form & Zod for robust data validation
+| Layer           | Technology             |
+| --------------- | ---------------------- |
+| Frontend        | Next.js 15, React 19   |
+| Styling         | Tailwind CSS, Shadcn UI |
+| Backend         | Convex                 |
+| Database        | Convex Database        |
+| Authentication  | Clerk                  |
+| AI              | Google Gemini          |
+| Background Jobs | Inngest                |
+| Email           | Resend                 |
+| Charts          | Recharts               |
+| Validation      | React Hook Form, Zod   |
 
-## 🧠 Most Difficult Parts of Building This
+---
 
-Building a robust expense-sharing application involves several complex challenges:
+## 🏗️ System Architecture
 
-1. **Complex Debt Simplification Algorithm:** Designing the math and logic that minimizes the total number of transactions between a group of people (e.g., if A owes B $10, and B owes C $10, the algorithm simplifies it to A owing C $10). 
-2. **Real-time Data Synchronization:** Ensuring that when one user adds an expense, all other involved users see the update instantly across their devices, which was handled gracefully using Convex.
-3. **AI Receipt Parsing:** Integrating Google Generative AI to accurately extract line items, prices, and taxes from varied and messy receipt formats, and reliably mapping them to the app's strict database structures.
-4. **Reliable Background Processes:** Handling scheduled tasks (like periodic email reminders) and asynchronous webhook operations reliably without blocking the main application flow, requiring careful orchestration with Inngest.
-5. **State Management & UI Optimism:** Keeping the UI snappy and responsive with optimistic updates while managing the complex relational data of users, groups, and expenses.
+```text
+                        +-------------------+
+                        |       User        |
+                        +---------+---------+
+                                  |
+                                  v
+                     +------------------------+
+                     | Next.js 15 Frontend    |
+                     | React 19 + Tailwind    |
+                     +-----------+------------+
+                                 |
+                                 v
+                     +------------------------+
+                     | Clerk Authentication   |
+                     +-----------+------------+
+                                 |
+                                 v
+                  +-----------------------------+
+                  | Convex Backend Functions    |
+                  +-----------+-----------------+
+                              |
+              +---------------+----------------+
+              |               |                |
+              v               v                v
+      Convex Database    Gemini AI       Inngest
+                              |               |
+                              |               |
+                              v               v
+                     Receipt Parsing    Background Jobs
+                                              |
+                                              v
+                                           Resend
+                                        Email Service
+```
+
+---
+
+## 🚀 Engineering Challenges
+
+* **Debt Simplification:** Implemented an algorithm that minimizes the number of transactions required to settle group expenses by calculating each member's net balance.
+* **Real-Time Synchronization:** Used Convex's real-time database to instantly update expenses, balances, and settlements across all connected users.
+* **AI Receipt Parsing:** Integrated Google Gemini to extract structured expense information from receipt images and convert it into application-ready data.
+* **Background Processing:** Used Inngest to handle asynchronous workflows such as reminder emails without affecting application responsiveness.
+* **Optimistic UI:** Implemented optimistic updates to provide instant user feedback while ensuring consistency between frontend and backend state.
+
+---
+
+## 🤔 Why These Technologies?
+
+| Technology                | Why it was used                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Next.js 15**            | Server Components, App Router, optimized rendering, and excellent performance.                                       |
+| **React 19**              | Modern component-based UI with efficient rendering.                                                                  |
+| **Convex**                | Provides a serverless backend, built-in database, and real-time synchronization without manually creating REST APIs. |
+| **Clerk**                 | Secure authentication with OAuth, session management, and user management out of the box.                            |
+| **Gemini AI**             | Extracts structured expense information from receipt images using AI.                                                |
+| **Inngest**               | Handles scheduled jobs, retries, and event-driven background workflows.                                              |
+| **Resend**                | Reliable transactional email delivery.                                                                               |
+| **Tailwind CSS**          | Utility-first CSS framework for rapid and consistent UI development.                                                 |
+| **Recharts**              | Responsive charts for expense analytics and financial visualization.                                                 |
+| **React Hook Form + Zod** | Efficient form handling with robust schema validation.                                                               |
+
+---
+
+
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/alok7456/splitr.git
+
+cd splitr
+
+npm install
+
+npm run dev
+```
+
+
+---
+
+## 🔮 Future Improvements
+
+* 🌍 Multi-currency expense support
+* ✍️ Better OCR support for handwritten receipts
+* 📱 Mobile application
+* 📶 Offline synchronization
+* 💳 UPI payment integration
+* 💸 Budgeting and spending limit tracking
