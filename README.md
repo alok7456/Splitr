@@ -34,19 +34,3 @@ Building a robust expense-sharing application involves several complex challenge
 3. **AI Receipt Parsing:** Integrating Google Generative AI to accurately extract line items, prices, and taxes from varied and messy receipt formats, and reliably mapping them to the app's strict database structures.
 4. **Reliable Background Processes:** Handling scheduled tasks (like periodic email reminders) and asynchronous webhook operations reliably without blocking the main application flow, requiring careful orchestration with Inngest.
 5. **State Management & UI Optimism:** Keeping the UI snappy and responsive with optimistic updates while managing the complex relational data of users, groups, and expenses.
-
-## 🛠️ Getting Started
-
-First, install dependencies:
-
-```bash
-npm install
-```
-
-Then, run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the app in action.
